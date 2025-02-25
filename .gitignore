@@ -1,0 +1,35 @@
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+
+# Poetry specific
+poetry.lock
+
+# SQLite database and migrations
+*.sqlite3
+tasks.db
+migrations/versions/
+
+# Logs
+logs/
+*.log
+
+# CSV and JSON output files
+data/*.csv
+data/*.json
+data/*.xml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# JetBrains files
+.idea/
+
+# Alembic cache
+migrations/__pycache__/
