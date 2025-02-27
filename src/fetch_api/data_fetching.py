@@ -13,9 +13,6 @@ from src.fetch_api.exceptions import (
 from src.fetch_api.schemas import PostSchema
 
 
-API_URL = "https://jsonplaceholder.typicode.com/posts"
-
-
 async def fetch_data(url: str) -> list[dict]:
     """Fetch data from the API asynchronously."""
     connector = aiohttp.TCPConnector(ssl=False)
