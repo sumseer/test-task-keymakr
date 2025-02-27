@@ -23,6 +23,8 @@ logs/
 data/*.csv
 data/*.json
 data/*.xml
+posts.csv
+posts.db
 
 # OS-specific files
 .DS_Store
