@@ -9,4 +9,4 @@ class PostSchema(BaseModel):
     body: str = Field(..., max_length=255)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
