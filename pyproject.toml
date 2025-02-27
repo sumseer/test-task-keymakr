@@ -2,7 +2,7 @@
 name = "test-task-keymakr"
 version = "0.1.0"
 description = ""
-authors = ["Max Savenya <savenya2013@gmail.com>"]
+authors = ["Max Savenya <maxonsavenya@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -17,6 +17,7 @@ logging = "^0.4.9.6"
 xmltodict = "^0.14.2"
 sqlalchemy = "^2.0.38"
 alembic = "^1.14.1"
+pydantic = "^2.10.6"
 
 
 [build-system]
