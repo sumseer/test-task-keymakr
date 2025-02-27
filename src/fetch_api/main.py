@@ -2,7 +2,9 @@ import asyncio
 
 from src.fetch_api.data_fetching import fetch_data, validate_posts
 from src.fetch_api.data_saving import save_posts_to_csv, save_posts_to_db
+from src.fetch_api.database.settings import init_db
 
+init_db()
 
 API_URL = "https://jsonplaceholder.typicode.com/posts"
 
