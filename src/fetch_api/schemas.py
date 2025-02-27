@@ -2,6 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+
 class PostSchema(BaseModel):
     id: Optional[int]
     user_id: int = Field(..., ge=1, alias="userId")
