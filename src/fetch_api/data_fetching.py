@@ -10,27 +10,29 @@ from src.fetch_api.exceptions import (
     APIRequestTimeoutError,
     APIRequestResponseError,
 )
-# from src.fetch_api.data_saving import save_posts_to_db, save_posts_to_csv
 from src.fetch_api.schemas import PostSchema
 
 
 API_URL = "https://jsonplaceholder.typicode.com/posts"
 
 
-async def fetch_data(session: aiohttp.ClientSession, url: str) -> list[dict]:
+async def fetch_data(url: str) -> list[dict]:
     """Fetch data from the API asynchronously."""
-    try:
-        async with session.get(url, timeout=ClientTimeout(total=10)) as response:
-            if response.status == 200:
-                return await response.json()
-            raise APIRequestResponseError(status_code=response.status)
+    connector = aiohttp.TCPConnector(ssl=False)
 
-    except asyncio.TimeoutError:
-        raise APIRequestTimeoutError()
-    except ClientError:
-        raise APIConnectionError()
-    except ValueError:
-        raise APIInvalidURLError()
+    async with aiohttp.ClientSession(connector=connector) as session:
+        try:
+            async with session.get(url, timeout=ClientTimeout(total=10)) as response:
+                if response.status == 200:
+                    return await response.json()
+                raise APIRequestResponseError(status_code=response.status)
+
+        except asyncio.TimeoutError:
+            raise APIRequestTimeoutError()
+        except ClientError:
+            raise APIConnectionError()
+        except ValueError:
+            raise APIInvalidURLError()
 
 
 def validate_posts(posts: list[dict]) -> list[PostSchema]:
@@ -48,17 +50,3 @@ def validate_posts(posts: list[dict]) -> list[PostSchema]:
         print(f"Warning! Skipped #{invalid_posts_count} invalid posts.")
 
     return valid_posts
-
-
-async def main():
-    """Fetch data from API, validate it, and save to database and CSV."""
-    connector = aiohttp.TCPConnector(ssl=False)
-
-    async with aiohttp.ClientSession(connector=connector) as session:
-        posts = await fetch_data(session, API_URL)
-        valid_posts = validate_posts(posts)
-        print(valid_posts)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
